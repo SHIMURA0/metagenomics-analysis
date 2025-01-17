@@ -115,9 +115,24 @@ project_root/
       ├── index/
       ├── ${sample_id}quant/
   ├── temp_bam/
+      ├── contigs_map_reads/
+      ├── ${sample_id}_mapped.bam
   ├── temp_bamsort/
+      ├── contigs_map_reads/
+          ├── ${sample_id}_unmappedsorted_reads.bam
+      ├── ${sample_id}_unmapped_sorted.bam
   ├── tmp/
+      ├── 15012646679834680840/
+      ├── latest/
   ├── Unigenes/
+      ├── DB
+      ├── DB.dbtype
+      ├── DB_h
+      ├── DB_h.dbtype
+      ├── DB_h.index
+      ├── DB.index
+      ├── DB.lookup
+      ├── DB.source
   ├── cluster_run.out
   ├── contigs_map_reads.out
   ├── genes_taxa.out
