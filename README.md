@@ -42,7 +42,23 @@ project_root/
       ├── Class.txt
       ├── Family.txt
       ├── formatTaxa.txt
-      ├── ${sample_id}_1.fastqc.zip
+      ├── Genus.txt
+      ├── Order.txt
+      ├── ORF_stats.txt
+      ├── Phylum.txt
+      ├── Species.txt
+      ├── Summary_Annotation.txt
+      ├── Unigenes.fa
+      ├── Unigenes_stats.txt
+      ├── Unigenes.TPM
+      ├── normalized/
+          ├── Class.txt
+          ├── Family.txt
+          ├── Genus.txt
+          ├── Order.txt
+          ├── Phylum.txt
+          ├── Species.txt
+          ├── Summary_Annotation.txt
   ├── raw_qc/
       ├── ${sample_id}_1_fastqc.html
       ├── ${sample_id}_1_fastqc.zip
@@ -64,11 +80,40 @@ project_root/
       ├── fastp.html
       ├── fastp.json
   ├── megantaxa/
-  ├── ORF_result/ 
+  ├── ORF_result/
+      ├── rename.txt
+      ├── ${sample_id}.fa
+      ├── Unigenes.fa
   ├── prodigal_temp/
+      ├── bbmapOut/
+          ├── ORFgenestats.txt
+          ├── ${sample_id}genesMapreadsl.txt
+          ├── ${sample_id}genestats.txt
+          ├── ${sample_id}mapped.sam
+          ├── ${sample_id}mapped.sorted.sam
+          ├── ${sample_id}mapped.sorted.sam.bai
+      ├── filter/
+          ├── ${sample_id}.fa
+      ├── ${sample_id}.fa
+      ├── ${sample_id}.gff
   ├── removelow/
+      ├── ${sample_id}_1.fq.gz
+      ├── ${sample_id}_2.fq.gz
   ├── removelow_qc/
+      ├── ${sample_id}_1.fastqc.html
+      ├── ${sample_id}_1.fastqc.zip
+      ├── ${sample_id}_2.fastqc.html
+      ├── ${sample_id}_2.fastqc.zip
+      ├── removelow_qc.html
+      ├── removelow_qc_data/
+          ├── multiqc_data.json
+          ├── multiqc_fastqc.txt
+          ├── multiqc_general_stats.txt
+          ├── multiqc.log
+          ├── multiqc_sources.txt
   ├── salmon_temp/
+      ├── index/
+      ├── ${sample_id}quant/
   ├── temp_bam/
   ├── temp_bamsort/
   ├── tmp/
@@ -85,6 +130,10 @@ project_root/
   ├── removehost_run1.out
   ├── salmon_run.out
   ├── Unigenesclu_seq.fasta
+  ├── Unigenes_clustered.tsv
+  ├── UnigenesDB_clu.0
+  ├── UnigenesDB_clu.1
+  ├── ...
 
 
 
@@ -111,9 +160,6 @@ project_root/
 
 
   
-
-
-  ├── utils.py ├── data/ │ ├── input/ │ │ ├── data_file_1.csv │ │ ├── data_file_2.csv │ ├── output/ │ ├── results.csv ├── tests/ │ ├── test_main.py │ ├── test_utils.py ├── README.md ├── requirements.txt
 ```
 
 ## 1. 创建项目根目录文件夹
