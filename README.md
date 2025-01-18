@@ -1,6 +1,13 @@
 # 宏基因组分析
 
-## 完整项目文件架构
+## 宏基因组分析
+```markdown 
+version: 1.0
+author: jing liu
+duration: 3 months
+```
+
+### 完整项目文件架构
 ``` 
 project_root/
   ├── sample_name.txt
@@ -149,11 +156,79 @@ project_root/
   ├── UnigenesDB_clu.0
   ├── UnigenesDB_clu.1
   ├── ...
+```
 
+### Step 1. Iniating the new project
 
+1.1 Create the project root directory using the following shell (bash) script
+```bash
+mkdir /data3/proj${year}/GHJC${year}${month}${date}${index}R${index}
+```
+1.2 Create two text file 
+```markdown
+projectInfo.txt
+sample_name.txt
+```
 
+### Step 2. Formatting fastq files
 
+2.1. Create a new directory for raw fastq file using the following shell (bash) script
+```bash
+mkdir /projectRoot/raw_fq
+```
+2.2. Create rename.txt file  
+2.3. Renaming file using the following shell (bash) script 
+```bash
+ls -l raw_fq/ | sed '1d' | sed -r 's/(.*)([[:space:]])(.*)/\2/' > rename1.txt
+```
+```bash
+cat rename1.txt | awk -F '-' '{print $3"_"$6}' | awk -F '_' '{print $1"_"$4}' > rename2.txt
+```
+2.4 Check if the number of rows of rename2.txt is twice as the number of rows of sample_name.txt using the following shell (bash) script
+```bash
+lines_rename2=$(wc -l < rename2.txt); lines_sample_name=$(wc -l < sample_name.txt); if [ "$lines_rename2" -eq $((2 * lines_sample_name)) ]; then echo "rename2.txt 的行数是 sample_name.txt 的两倍"; else echo "rename2.txt 的行数不是 sample_name.txt 的两倍"; fi
+```
+2.5. Renaming the raw fastq file
+```bash
+cd raw_fq/
+bash /home/meta_software/cnas_scripts/V24/rawfq_rename.sh ../rename.txt
+```
 
+### Step 3. Data analysis
+
+#### Step 3.1. Preparing environments, files and folders
+3.1.1. Activating conda environment
+```bash
+conda activate meta1_py3
+```
+3.1.2. Creating a directory for intermediate results.
+```bash
+bash /home/meta_software/cnas_scripts/V24/cnas_dir.sh GHJC${report_id}
+```
+#### Step 3.2. Raw data quality checking and cleaning 
+
+3.2.1. Using FastQC and MUltiQC for generating quality checking report for raw sequencing data 
+```bash
+nohup bash /home/meta_software/cnas_scripts/V24/readsqc1.sh /projectRoot/sample_name.txt > readsqc1.out 2>&1 &
+```
+outputFile: 
+```markdown
+projectRoot/removelow/fq.gz
+```
+
+3.2.2. Removing human genes using Bowtie2
+```bash
+nohup bash /home/meta_software/cnas_scripts/V24/removehost_run1.sh /projectRoot/sample_name.txt > removehost_run1.out 2>&1 &
+```
+3.3.3. Generating raw qc count and clean qc count files.
+```bash
+nohup bash /home/meta_software/cnas_scripts/V24/readsqc3.sh > readsqc3.out 2>&1 &
+```
+outputFile: 
+```markdown
+01.QC_reads/raw_qc_count.txt
+01.QC_reads/clean_qc_count.txt
+```
 
 
 
@@ -177,9 +252,9 @@ project_root/
   
 ```
 
-## 1. 创建项目根目录文件夹
-在`/data3/prj202x` 路径下新建项目根目录文件，
-在
+## 1. Make new directory for project 
+在`/data3/prj${year}` 路径下新建项目根目录文件，
+Use the following shell (bash) script to create the new report project root dirtectory 
 ``` bash
-bash /home/meta_software/cnas_scripts/V24/cnas_dir.sh GHJCxxx(报告编号)
+bash /home/meta_software/cnas_scripts/V24/cnas_dir.sh GHJC${report_id}
 
